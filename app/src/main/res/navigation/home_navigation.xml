@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/home_navigation"
+    app:startDestination="@id/jokeItemFragment">
+
+    <fragment
+        android:id="@+id/jokeItemFragment"
+        android:name="com.scania.test.presentation.FavouriteJokesFragment"
+        android:label="fragment_item_list"
+        tools:layout="@layout/fragment_favourite_joke_list" >
+        <action
+            android:id="@+id/action_jokeItemFragment_to_jokeSearchFragment"
+            app:destination="@id/jokeSearchFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/jokeSearchFragment"
+        android:name="com.scania.test.presentation.JokeSearchFragment"
+        android:label="fragment_joke_search"
+        tools:layout="@layout/fragment_joke_search" >
+        <action
+            android:id="@+id/action_jokeSearchFragment_to_jokeFragment"
+            app:destination="@id/jokeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/jokeFragment"
+        android:name="com.scania.test.presentation.JokeFragment"
+        android:label="fragment_search_result_list"
+        tools:layout="@layout/fragment_search_result_list" />
+
+</navigation>
