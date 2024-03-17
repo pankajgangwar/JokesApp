@@ -7,16 +7,22 @@ data class JokeResponseModel(@SerializedName("amount")
                              val amount: Int = 0,
                              @SerializedName("error")
                              val error: Boolean = false,
+                             @SerializedName("message")
+                             val message: String = "",
+                             @SerializedName("additionalInfo")
+                             val additionalInfo: String = "",
                              @SerializedName("jokes")
                              val jokes: List<JokesItem>?) {
     data class JokesItem(@SerializedName("delivery")
-                         val delivery: String = "",
+                         val delivery: String? = "",
                          @SerializedName("flags")
                          val flags: Flags,
                          @SerializedName("safe")
                          val safe: Boolean = false,
                          @SerializedName("setup")
-                         val setup: String = "",
+                         val setup: String? = "",
+                         @SerializedName("joke")
+                         val joke: String? = "",
                          @SerializedName("id")
                          val id: Int = 0,
                          @SerializedName("category")

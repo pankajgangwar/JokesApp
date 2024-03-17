@@ -19,4 +19,7 @@ interface JokesDao {
 
     @Delete
     fun removeJoke(joke: Joke)
+
+    @Query("Select * from Joke where id = :id")
+    fun isFavourite(id: Int) : List<Joke>
 }

@@ -11,11 +11,13 @@ data class Joke(
     val flags: Flags,
     val safe: Boolean = false,
     val setup: String = "",
+    val joke : String = "",
     @PrimaryKey
     val id: Int,
     val category: String = "",
     val type: String = "",
-    val lang: String = "") {
+    val lang: String = "",
+    var favourite : Boolean = false) {
 
     data class Flags(val sexist: Boolean = false,
                      val explicit: Boolean = false,

@@ -4,13 +4,11 @@ import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
+import retrofit2.http.Url
 
 interface JokeService {
 
-    @GET("{fullUrl}")
-    suspend fun searchJokes(
-        @Path(value = "fullUrl") fullUrl : String,
-        @Query("blacklistFlags") blacklistFlags : String)
-    : Response<JokeResponseModel>
+    @GET
+    suspend fun searchJokes(@Url fullUrl : String): Response<JokeResponseModel>
 
 }

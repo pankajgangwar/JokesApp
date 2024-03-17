@@ -8,6 +8,7 @@ import com.scania.test.data.JokeRepository
 import com.scania.test.data.JokeService
 import com.scania.test.data.JokesDao
 import com.scania.test.domain.GetFavouriteJokesUseCase
+import com.scania.test.domain.IsJokeFavouriteUseCase
 import com.scania.test.domain.JokesRoomUseCase
 import com.scania.test.domain.RemoveJokeUseCase
 import com.scania.test.domain.SaveJokeUseCase
@@ -74,7 +75,9 @@ object AppModule {
     @Singleton
     fun provideRoomJokesUseCase(repository: JokeRepository) : JokesRoomUseCase {
         return JokesRoomUseCase(GetFavouriteJokesUseCase(repository),
-            RemoveJokeUseCase(repository), SaveJokeUseCase(repository))
+            RemoveJokeUseCase(repository), SaveJokeUseCase(repository),
+            IsJokeFavouriteUseCase(repository)
+        )
     }
 
     /*Room Dao*/
