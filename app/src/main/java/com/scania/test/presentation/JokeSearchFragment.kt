@@ -5,8 +5,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.core.os.bundleOf
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.scania.test.R
 import com.scania.test.databinding.FragmentJokeSearchBinding
@@ -16,7 +17,8 @@ import kotlin.text.StringBuilder
 @AndroidEntryPoint
 class JokeSearchFragment : Fragment() {
 
-    private val viewModel : HomeViewModel by viewModels()
+    private val viewModel : HomeViewModel by activityViewModels()
+    //lateinit var viewModel: HomeViewModel
     private lateinit var binding: FragmentJokeSearchBinding
 
     override fun onCreateView(inflater: LayoutInflater,
@@ -24,7 +26,7 @@ class JokeSearchFragment : Fragment() {
                               savedInstanceState: Bundle?): View? {
         binding = FragmentJokeSearchBinding.inflate(layoutInflater)
         binding.navigateBackSearchToolbar.setNavigationOnClickListener {
-            findNavController().navigateUp()
+            navigateBack()
         }
         binding.searchButton.setOnClickListener {
             val url = buildUrl()
@@ -36,7 +38,22 @@ class JokeSearchFragment : Fragment() {
         binding.categoryAny.setOnCheckedChangeListener { buttonView, isChecked ->
             toggleCustomCheckBox(!isChecked)
         }
+        activity?.onBackPressedDispatcher?.addCallback(viewLifecycleOwner,
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    navigateBack()
+                }
+            })
         return binding.root
+    }
+
+
+    private fun navigateBack(){
+        if(!viewModel.hasFavouriteJokesSaved()){
+            activity?.finish()
+        }else{
+            findNavController().navigate(R.id.action_jokeSearchFragment_to_FavouriteJokesFragment)
+        }
     }
 
     private fun toggleCustomCheckBox(enabled : Boolean) {

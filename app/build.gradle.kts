@@ -50,6 +50,7 @@ dependencies {
 
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.6.2")
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2")
+    //implementation("android.arch.lifecycle:extensions:1.1.1")
 
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("com.google.android.material:material:1.11.0")
@@ -57,6 +58,7 @@ dependencies {
     implementation("androidx.navigation:navigation-ui-ktx:2.7.5")
 
     implementation("com.google.code.gson:gson:2.9.1")
+    implementation ("com.github.razir.progressbutton:progressbutton:2.1.0")
 
     implementation("androidx.core:core-splashscreen:1.1.0-alpha02")
 
@@ -68,6 +70,7 @@ dependencies {
     implementation("com.google.dagger:hilt-android:2.48")
     implementation("androidx.legacy:legacy-support-v4:1.0.0")
     implementation("androidx.recyclerview:recyclerview:1.3.2")
+    implementation("androidx.fragment:fragment-ktx:1.6.2")
     kapt("com.google.dagger:hilt-compiler:2.48")
 
     ksp("androidx.room:room-compiler:2.6.0")

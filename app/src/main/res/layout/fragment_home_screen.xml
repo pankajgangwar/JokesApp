@@ -38,6 +38,7 @@
         app:cornerRadius="20dp"
         android:text="Continue"
         android:textAllCaps="false"
+        android:visibility="gone"
         android:drawablePadding="10dp"
         android:drawableEnd="@drawable/double_arrow_right_icon"
         app:layout_constraintStart_toStartOf="parent"

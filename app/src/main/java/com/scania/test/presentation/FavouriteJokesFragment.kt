@@ -7,6 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -27,7 +29,7 @@ import javax.inject.Inject
 class FavouriteJokesFragment : Fragment() {
 
     lateinit var binding: FragmentFavouriteJokeListBinding
-    private val viewModel : HomeViewModel by viewModels()
+    private val viewModel : HomeViewModel by activityViewModels()
     private val TAG = FavouriteJokesFragment::class.java.simpleName
 
     override fun onCreateView(inflater: LayoutInflater,
@@ -37,25 +39,19 @@ class FavouriteJokesFragment : Fragment() {
         binding.searchForJoke.setOnClickListener {
             findNavController().navigate(R.id.action_favouriteJokesFragment_to_jokeSearchFragment)
         }
+        activity?.onBackPressedDispatcher?.addCallback(viewLifecycleOwner,
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    activity?.finish()
+                }
+            })
         observerFavouriteJokes()
         return binding.root
     }
 
     private fun observerFavouriteJokes(){
+        viewModel.getFavouriteJokes()
         viewLifecycleOwner.lifecycleScope.launch {
-            launch(Dispatchers.IO) {
-                val jokes = arrayListOf<Joke>()
-                jokes.add(Joke(delivery = "This is joke 1", id = 1, flags = Joke.Flags()))
-                jokes.add(Joke(delivery = "This is joke 2", id = 2, flags = Joke.Flags()))
-                jokes.add(Joke(delivery = "This is joke 3", id = 3, flags = Joke.Flags()))
-                jokes.add(Joke(delivery = "This is joke 4", id = 4, flags = Joke.Flags()))
-
-                for(joke in jokes){
-                   // viewModel.saveJoke(joke)
-                }
-                //delay(5_000)
-                viewModel.getFavouriteJokes()
-            }
             launch(Dispatchers.Main) {
                 viewModel.favouriteJokesStateFlow.collect { uiState ->
                     //Log.d(TAG, " ${uiState}")

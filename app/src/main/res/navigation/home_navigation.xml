@@ -22,6 +22,12 @@
         <action
             android:id="@+id/action_jokeSearchFragment_to_jokeSearchResultFragment"
             app:destination="@id/jokeSearchResultFragment" />
+        <action
+            android:id="@+id/action_jokeSearchFragment_to_FavouriteJokesFragment"
+            app:destination="@id/FavouriteJokesFragment"
+            app:popUpTo="@id/FavouriteJokesFragment"
+            app:popUpToInclusive="false"
+            />
     </fragment>
     <fragment
         android:id="@+id/jokeSearchResultFragment"
