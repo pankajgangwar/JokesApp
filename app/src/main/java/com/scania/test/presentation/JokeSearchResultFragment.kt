@@ -51,15 +51,28 @@ class JokeSearchResultFragment : Fragment() {
                         is UIState.Loading -> {
                             binding.searchedJokesProgress.visibility = View.VISIBLE
                             binding.jokeSearchResultList.visibility = View.GONE
+
+                            binding.noJokesImageView.visibility = View.GONE
+                            binding.noJokesFoundText.visibility = View.GONE
                         }
                         is UIState.Success -> {
                             binding.searchedJokesProgress.visibility = View.GONE
                             binding.jokeSearchResultList.visibility = View.VISIBLE
+
+                            binding.noJokesImageView.visibility = View.GONE
+                            binding.noJokesFoundText.visibility = View.GONE
+
                             jokeSearchList = uiState.jokes
                             val adapter = JokeSearchResultRecyclerViewAdapter(jokeSearchList, callBack)
                             binding.jokeSearchResultList.adapter = adapter
                         }
                         is UIState.Error -> {
+                            binding.searchedJokesProgress.visibility = View.GONE
+                            binding.jokeSearchResultList.visibility = View.GONE
+
+                            binding.noJokesImageView.visibility = View.VISIBLE
+                            binding.noJokesFoundText.visibility = View.VISIBLE
+
                             Log.e(TAG, "Error ${uiState.message}")
                         }
                     }

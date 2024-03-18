@@ -7,15 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.scania.test.R
 import com.scania.test.databinding.FragmentJokeSearchBinding
-import com.scania.test.domain.UIState
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.launch
 import kotlin.text.StringBuilder
 
 @AndroidEntryPoint
@@ -38,7 +33,20 @@ class JokeSearchFragment : Fragment() {
                 bundleOf( JokeSearchResultFragment.ARG_KEY_URL to url )
             )
         }
+        binding.categoryAny.setOnCheckedChangeListener { buttonView, isChecked ->
+            toggleCustomCheckBox(!isChecked)
+        }
         return binding.root
+    }
+
+    private fun toggleCustomCheckBox(enabled : Boolean) {
+        binding.christmasCheckbox.isEnabled = enabled
+        binding.programmingCheckbox.isEnabled = enabled
+        binding.miscCheckbox.isEnabled = enabled
+        binding.darkCheckbox.isEnabled = enabled
+        binding.miscCheckbox.isEnabled = enabled
+        binding.punCheckbox.isEnabled = enabled
+        binding.spookyCheckbox.isEnabled = enabled
     }
 
     private fun buildUrl() : String {

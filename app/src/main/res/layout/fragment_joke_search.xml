@@ -164,7 +164,7 @@
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/flagLabel"
-        android:text="Select Flags"
+        android:text="Select Flags (optional)"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
@@ -254,6 +254,7 @@
         android:id="@+id/searchForJokeEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:hint="(optional)"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/searchForJokeLabel"
         android:layout_marginHorizontal="10dp"
