@@ -58,6 +58,8 @@ dependencies {
 
     implementation("com.google.code.gson:gson:2.9.1")
 
+    implementation("androidx.core:core-splashscreen:1.1.0-alpha02")
+
     implementation(platform("com.squareup.okhttp3:okhttp-bom:4.10.0"))
     implementation("com.squareup.okhttp3:okhttp")
     implementation("com.squareup.okhttp3:logging-interceptor")

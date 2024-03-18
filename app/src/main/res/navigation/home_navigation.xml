@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/home_navigation"
-    app:startDestination="@id/FavouriteJokesFragment">
+    app:startDestination="@id/homeScreenFragment">
 
     <fragment
         android:id="@+id/FavouriteJokesFragment"
@@ -28,5 +28,17 @@
         android:name="com.scania.test.presentation.JokeSearchResultFragment"
         android:label="JokeSearchResultFragment"
         tools:layout="@layout/fragment_search_result_list" />
+    <fragment
+        android:id="@+id/homeScreenFragment"
+        android:name="com.scania.test.presentation.HomeScreenFragment"
+        android:label="homeScreenFragment"
+        tools:layout="@layout/fragment_home_screen" >
+        <action
+            android:id="@+id/action_homeScreenFragment_to_FavouriteJokesFragment"
+            app:destination="@id/FavouriteJokesFragment" />
+        <action
+            android:id="@+id/action_homeScreenFragment_to_jokeSearchFragment"
+            app:destination="@id/jokeSearchFragment" />
+    </fragment>
 
 </navigation>
