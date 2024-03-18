@@ -27,7 +27,6 @@ class JokeSearchResultRecyclerViewAdapter(private val searchedJokes: List<Joke>,
         holder.favouriteIcon.setOnClickListener {
             callback.onClick(position)
         }
-        Log.d("Adapter", "${joke.id} -> ${joke.favourite}")
         if(joke.favourite){
             holder.favouriteIcon.setImageResource(R.drawable.ic_favourite_selected)
         }else{

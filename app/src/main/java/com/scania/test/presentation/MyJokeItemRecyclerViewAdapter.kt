@@ -27,7 +27,6 @@ class MyJokeItemRecyclerViewAdapter(private val jokeList: List<Joke>,
         holder.favouriteIcon.setOnClickListener {
             callback.onClick(joke)
         }
-        Log.d("Adapter", "${joke.id} -> ${joke.favourite}")
         holder.favouriteIcon.setImageResource(R.drawable.ic_favourite_selected)
         if(joke.joke.isEmpty()){
             holder.idView.text = joke.setup

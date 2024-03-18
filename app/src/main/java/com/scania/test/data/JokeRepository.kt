@@ -1,5 +1,6 @@
 package com.scania.test.data
 
+import android.util.Log
 import com.google.gson.Gson
 import com.scania.test.domain.Joke
 import kotlinx.coroutines.flow.Flow
@@ -9,12 +10,12 @@ class JokeRepository @Inject constructor(private val jokeService: JokeService,
                                          private val gson: Gson,
                                          private val jokesDao: JokesDao) {
 
+    private val TAG = JokeRepository::class.java.simpleName
     suspend fun searchForJokes(fullUrl : String ): Response<JokeResponseModel?> {
         val response = jokeService.searchJokes(fullUrl)
+        //Log.e(TAG, "Error isSuccess ${!response.isSuccess()} error : ${response.body()?.error}")
         if (!response.isSuccess() || response.body()?.error == true) {
-            val err = response.errorBody()?.string()
-            val errorResponse = gson.fromJson(err, ErrorResponse::class.java)
-            Response.Error(Failure(errorResponse.message))
+            Response.Error(Failure(response.body()?.message ?: "No jokes found"))
         }
         return Response.Success(response.body())
     }

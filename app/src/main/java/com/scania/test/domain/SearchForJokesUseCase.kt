@@ -14,9 +14,9 @@ class SearchForJokesUseCase @Inject constructor(private val jokeRepository: Joke
         try {
             when (val response = jokeRepository.searchForJokes(fullUrl)) {
                 is Response.Success -> {
-                    Log.d(TAG, "Success ${response.data}")
+                   // Log.d(TAG, "Success ${response.data}")
                     if(response.data?.error == true){
-                        emit(UIState.Error("No jokes available"))
+                        emit(UIState.Error(response.data?.message ?: "No jokes found"))
                     } else {
                         emit(
                             UIState.Success(jokesResponseMapper(response.data))
@@ -24,7 +24,7 @@ class SearchForJokesUseCase @Inject constructor(private val jokeRepository: Joke
                     }
                 }
                 is Response.Error -> {
-                    Log.d(TAG, "Error ${response.error}")
+                    //Log.d(TAG, "Error ${response.error}")
                     emit(UIState.Error(response.error.message))
                 }
             }

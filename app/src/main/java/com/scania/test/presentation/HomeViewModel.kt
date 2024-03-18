@@ -39,7 +39,7 @@ class HomeViewModel @Inject constructor(
                     val jokeList = uiState.jokes
                     for(joke in jokeList ){
                         joke.favourite = jokeRoomUseCase.favouriteUseCase(joke)
-                        Log.d(TAG, "isFavourite ${joke.id} -> ${joke.favourite}")
+                        //Log.d(TAG, "isFavourite ${joke.id} -> ${joke.favourite}")
                     }
                 }
                 else -> {}

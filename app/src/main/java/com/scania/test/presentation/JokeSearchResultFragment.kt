@@ -72,6 +72,7 @@ class JokeSearchResultFragment : Fragment() {
 
                             binding.noJokesImageView.visibility = View.VISIBLE
                             binding.noJokesFoundText.visibility = View.VISIBLE
+                            binding.noJokesFoundText.text = uiState.message
 
                             Log.e(TAG, "Error ${uiState.message}")
                         }

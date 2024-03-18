@@ -9,6 +9,8 @@ data class JokeResponseModel(@SerializedName("amount")
                              val error: Boolean = false,
                              @SerializedName("message")
                              val message: String = "",
+                             @SerializedName("internalError")
+                             val internalError: String = "",
                              @SerializedName("additionalInfo")
                              val additionalInfo: String = "",
                              @SerializedName("jokes")
