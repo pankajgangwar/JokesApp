@@ -40,6 +40,7 @@ android {
     }
     buildFeatures {
         viewBinding = true
+        dataBinding = true
     }
 }
 
@@ -58,7 +59,6 @@ dependencies {
     implementation("androidx.navigation:navigation-ui-ktx:2.7.5")
 
     implementation("com.google.code.gson:gson:2.9.1")
-    implementation ("com.github.razir.progressbutton:progressbutton:2.1.0")
 
     implementation("androidx.core:core-splashscreen:1.1.0-alpha02")
 
@@ -71,6 +71,10 @@ dependencies {
     implementation("androidx.legacy:legacy-support-v4:1.0.0")
     implementation("androidx.recyclerview:recyclerview:1.3.2")
     implementation("androidx.fragment:fragment-ktx:1.6.2")
+    implementation("androidx.databinding:databinding-runtime:8.3.0")
+
+    implementation ("com.airbnb.android:lottie-compose:5.0.3")
+
     kapt("com.google.dagger:hilt-compiler:2.48")
 
     ksp("androidx.room:room-compiler:2.6.0")

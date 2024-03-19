@@ -16,10 +16,9 @@
 
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/favouriteJokeToolbar"
-            style="@style/Theme.ToolBar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:theme="?attr/actionBarTheme"
+            android:theme="@style/Theme.ToolBar"
             app:title="Favourite Jokes"
             app:titleTextColor="@color/black">
 

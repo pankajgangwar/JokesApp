@@ -17,10 +17,9 @@
 
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/jokeSearchResultToolbar"
-            style="@style/Theme.ToolBar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:theme="?attr/actionBarTheme"
+            android:theme="@style/Theme.ToolBar"
             app:navigationIcon="@drawable/ic_arrow_back"
             app:title="Search result"
             app:titleTextColor="@color/black" />
@@ -62,6 +61,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:textSize="18sp"
         android:layout_marginTop="10dp"
+        android:fontFamily="monospace"
         android:visibility="gone"
         />
 

@@ -39,6 +39,8 @@ class FavouriteJokesFragment : Fragment() {
         binding.searchForJoke.setOnClickListener {
             findNavController().navigate(R.id.action_favouriteJokesFragment_to_jokeSearchFragment)
         }
+        binding.favouriteJokeToolbar.setTitleTextAppearance(requireContext(), R.style.Theme_ToolBar)
+
         activity?.onBackPressedDispatcher?.addCallback(viewLifecycleOwner,
             object : OnBackPressedCallback(true) {
                 override fun handleOnBackPressed() {

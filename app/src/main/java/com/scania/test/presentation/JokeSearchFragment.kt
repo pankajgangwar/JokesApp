@@ -5,8 +5,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.CompoundButton
 import androidx.activity.OnBackPressedCallback
 import androidx.core.os.bundleOf
+import androidx.databinding.DataBindingUtil
+import androidx.databinding.ObservableBoolean
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.scania.test.R
@@ -18,16 +21,20 @@ import kotlin.text.StringBuilder
 class JokeSearchFragment : Fragment() {
 
     private val viewModel : HomeViewModel by activityViewModels()
-    //lateinit var viewModel: HomeViewModel
     private lateinit var binding: FragmentJokeSearchBinding
+    var customToggle = ObservableBoolean()
 
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        binding = FragmentJokeSearchBinding.inflate(layoutInflater)
+        binding = DataBindingUtil.inflate(layoutInflater, R.layout.fragment_joke_search,  container, false)
+        binding.lifecycleOwner = this
+        binding.toggle = this
         binding.navigateBackSearchToolbar.setNavigationOnClickListener {
             navigateBack()
         }
+        binding.navigateBackSearchToolbar.setTitleTextAppearance(requireContext(), R.style.Theme_ToolBar)
+
         binding.searchButton.setOnClickListener {
             val url = buildUrl()
             findNavController().navigate(
@@ -35,9 +42,17 @@ class JokeSearchFragment : Fragment() {
                 bundleOf( JokeSearchResultFragment.ARG_KEY_URL to url )
             )
         }
-        binding.categoryAny.setOnCheckedChangeListener { buttonView, isChecked ->
-            toggleCustomCheckBox(!isChecked)
+        binding.categoryCustom.setOnCheckedChangeListener { buttonView, isChecked ->
+            customToggle.set(isChecked)
         }
+
+        binding.programmingCheckbox.setOnCheckedChangeListener(checkedChangedListener)
+        binding.miscCheckbox.setOnCheckedChangeListener(checkedChangedListener)
+        binding.darkCheckbox.setOnCheckedChangeListener(checkedChangedListener)
+        binding.punCheckbox.setOnCheckedChangeListener(checkedChangedListener)
+        binding.spookyCheckbox.setOnCheckedChangeListener(checkedChangedListener)
+        binding.christmasCheckbox.setOnCheckedChangeListener(checkedChangedListener)
+
         activity?.onBackPressedDispatcher?.addCallback(viewLifecycleOwner,
             object : OnBackPressedCallback(true) {
                 override fun handleOnBackPressed() {
@@ -56,15 +71,10 @@ class JokeSearchFragment : Fragment() {
         }
     }
 
-    private fun toggleCustomCheckBox(enabled : Boolean) {
-        binding.christmasCheckbox.isEnabled = enabled
-        binding.programmingCheckbox.isEnabled = enabled
-        binding.miscCheckbox.isEnabled = enabled
-        binding.darkCheckbox.isEnabled = enabled
-        binding.miscCheckbox.isEnabled = enabled
-        binding.punCheckbox.isEnabled = enabled
-        binding.spookyCheckbox.isEnabled = enabled
-    }
+    private val checkedChangedListener =
+        CompoundButton.OnCheckedChangeListener { buttonView, isChecked ->
+            customToggle.set(anyCustomCheckboxIsEnabled())
+        }
 
     private fun buildUrl() : String {
         val urlBuilder = StringBuilder()

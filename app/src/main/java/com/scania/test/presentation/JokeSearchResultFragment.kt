@@ -11,6 +11,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.scania.test.R
 import com.scania.test.databinding.FragmentSearchResultListBinding
 import com.scania.test.domain.Joke
 import com.scania.test.domain.UIState
@@ -40,6 +41,8 @@ class JokeSearchResultFragment : Fragment() {
         binding.jokeSearchResultToolbar.setNavigationOnClickListener {
             findNavController().navigateUp()
         }
+
+        binding.jokeSearchResultToolbar.setTitleTextAppearance(requireContext(), R.style.Theme_ToolBar)
 
         lifecycleScope.launch {
             launch(Dispatchers.IO) {
