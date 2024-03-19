@@ -4,3 +4,5 @@ Domain layer has "USE CASES" for invoking data layer with repository.
 
 App uses HILT library for dependency injection although test cases are not written but app architecture is designed 
 in such a way that its easy to mock data and domain layer using HILT
+
+App is implemented with Recycler view and two-way data binding 
