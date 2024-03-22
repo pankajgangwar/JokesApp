@@ -1,6 +1,7 @@
 package com.scania.test.presentation
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +10,7 @@ import android.widget.CompoundButton
 import androidx.activity.OnBackPressedCallback
 import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
+import androidx.databinding.Observable
 import androidx.databinding.ObservableBoolean
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -23,6 +25,7 @@ class JokeSearchFragment : Fragment() {
     private val viewModel : HomeViewModel by activityViewModels()
     private lateinit var binding: FragmentJokeSearchBinding
     var customToggle = ObservableBoolean()
+    private val TAG = JokeSearchFragment::class.java.simpleName
 
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?,
@@ -42,10 +45,13 @@ class JokeSearchFragment : Fragment() {
                 bundleOf( JokeSearchResultFragment.ARG_KEY_URL to url )
             )
         }
-        binding.categoryCustom.setOnCheckedChangeListener { buttonView, isChecked ->
-            customToggle.set(isChecked)
-        }
-
+        customToggle.addOnPropertyChangedCallback( object : Observable.OnPropertyChangedCallback() {
+            override fun onPropertyChanged(sender: Observable?, propertyId: Int) {
+                if(customToggle.get()){
+                    binding.programmingCheckbox.isChecked = true
+                }
+            }
+        })
         binding.programmingCheckbox.setOnCheckedChangeListener(checkedChangedListener)
         binding.miscCheckbox.setOnCheckedChangeListener(checkedChangedListener)
         binding.darkCheckbox.setOnCheckedChangeListener(checkedChangedListener)

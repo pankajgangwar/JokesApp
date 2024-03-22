@@ -71,6 +71,7 @@
         android:fontFamily="monospace"
         app:layout_constraintStart_toEndOf="@id/categoryAny"
         app:layout_constraintTop_toBottomOf="@id/categoryLabel"
+        android:checked="@={toggle.customToggle}"
         android:text="Custom"
         />
 
@@ -85,7 +86,6 @@
         android:layout_marginStart="10dp"
         android:fontFamily="monospace"
         android:text="Programming"
-        android:checked="@{toggle.customToggle}"
         android:enabled="@{toggle.customToggle}"
         />
 
