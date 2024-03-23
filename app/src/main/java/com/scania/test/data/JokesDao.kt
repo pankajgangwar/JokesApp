@@ -12,7 +12,7 @@ import kotlinx.coroutines.flow.Flow
 interface JokesDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertJoke(joke: Joke)
+    suspend fun saveJoke(joke: Joke) : Long
 
     @Query("SELECT * FROM joke ")
     fun getFavouriteJokes(): Flow<List<Joke>>
@@ -20,6 +20,6 @@ interface JokesDao {
     @Delete
     fun removeJoke(joke: Joke)
 
-    @Query("Select * from Joke where id = :id")
-    fun isFavourite(id: Int) : List<Joke>
+    @Query("Select * from Joke where id = :id LIMIT 1")
+    fun findJoke(id: Int) : Joke?
 }

@@ -19,6 +19,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 @AndroidEntryPoint
 class JokeSearchResultFragment : Fragment() {
@@ -93,11 +94,15 @@ class JokeSearchResultFragment : Fragment() {
                 Toast.makeText(requireContext(), "Joke is already added to favourites", Toast.LENGTH_SHORT).show()
             }else{
                 lifecycleScope.launch(Dispatchers.IO) {
-                    viewModel.saveJoke(jokeSearchList[position])
+                    val insertedId = viewModel.saveJoke(jokeSearchList[position])
+                    if(insertedId >= 0){
+                        withContext(Dispatchers.Main){
+                            val adapter = binding.jokeSearchResultList.adapter as JokeSearchResultRecyclerViewAdapter
+                            adapter.updateJoke(position)
+                            Toast.makeText(requireContext(), "Joke added to favourites", Toast.LENGTH_SHORT).show()
+                        }
+                    }
                 }
-                val adapter = binding.jokeSearchResultList.adapter as JokeSearchResultRecyclerViewAdapter
-                adapter.updateJoke(position)
-                Toast.makeText(requireContext(), "Joke added to favourites", Toast.LENGTH_SHORT).show()
             }
         }
     }

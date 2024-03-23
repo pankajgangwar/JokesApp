@@ -69,7 +69,7 @@ class HomeViewModel @Inject constructor(
         jokeRoomUseCase.removeJokeUseCase(joke)
     }
 
-    suspend fun saveJoke(joke: Joke){
-        jokeRoomUseCase.saveJokeUseCase(joke)
+    suspend fun saveJoke(joke: Joke) : Long {
+        return jokeRoomUseCase.saveJokeUseCase(joke)
     }
 }

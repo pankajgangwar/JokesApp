@@ -29,11 +29,11 @@ class JokeRepository @Inject constructor(private val jokeService: JokeService,
     }
 
     suspend fun isFavourite(joke: Joke) : Boolean {
-        val res = jokesDao.isFavourite(joke.id)
-        return (res.size == 1 && res[0].favourite)
+        val res = jokesDao.findJoke(joke.id)
+        return (res != null)
     }
 
-    suspend fun saveJoke(joke : Joke)  {
-        return jokesDao.insertJoke(joke)
+    suspend fun saveJoke(joke : Joke) : Long  {
+        return jokesDao.saveJoke(joke)
     }
 }
